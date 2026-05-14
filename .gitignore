@@ -1,0 +1,48 @@
+# macOS
+.DS_Store
+
+# Xcode / iOS
+*.xcuserdata
+*.xcuserdatad/
+DerivedData/
+build/
+.swiftpm/
+Package.resolved
+
+# Android / Gradle
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+captures/
+
+# HarmonyOS / DevEco
+oh_modules/
+.preview/
+.hvigor/
+.cxx/
+hvigor/
+
+# Fonts — downloaded by shared/scripts/fetch-fonts.sh (not committed; license requires download)
+ios/LiulianApp/Resources/Fonts/*.ttf
+ios/LiulianApp/Resources/Fonts/*.otf
+android/liulian-ui/src/main/res/font/*.ttf
+android/liulian-ui/src/main/res/font/*.otf
+harmony/entry/src/main/resources/rawfile/fonts/*.ttf
+harmony/entry/src/main/resources/rawfile/fonts/*.otf
+
+# Shared cache — re-built from design-system via sync-tokens.sh
+shared/design-tokens/*
+
+# VR baselines — generated artifacts, regenerate from source
+shared/refs/*.png
+
+# Generated tokens — committed for now so each platform's IDE picks them up without running sync first
+# ios/LiulianUI/Sources/LiulianUI/Tokens.swift
+# android/liulian-ui/src/main/kotlin/io/liulian/ui/Tokens.kt
+# harmony/liulian_ui/src/main/ets/components/tokens.ets
+
+# Editor
+.vscode/
+*.swp
