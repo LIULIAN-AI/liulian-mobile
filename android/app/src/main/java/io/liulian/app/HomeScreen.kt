@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.weight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -39,11 +38,12 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     var selected by remember { mutableStateOf("aare-bern") }
 
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(LiulianTokens.Colors.canvasWarm)
-            .verticalScroll(rememberScrollState())
-            .padding(LiulianTokens.Spacing.s5),
+        modifier =
+            modifier
+                .fillMaxSize()
+                .background(LiulianTokens.Colors.canvasWarm)
+                .verticalScroll(rememberScrollState())
+                .padding(LiulianTokens.Spacing.s5),
         verticalArrangement = Arrangement.spacedBy(LiulianTokens.Spacing.s5),
     ) {
         Header()
@@ -111,7 +111,10 @@ private fun QuickActions() {
 }
 
 @Composable
-private fun Stations(selected: String, onSelect: (String) -> Unit) {
+private fun Stations(
+    selected: String,
+    onSelect: (String) -> Unit,
+) {
     LiulianText("stations", variant = LiulianTextVariant.MonoLabel, color = LiulianTokens.Colors.inkFaint)
     Column(verticalArrangement = Arrangement.spacedBy(LiulianTokens.Spacing.s3)) {
         listOf("aare-bern", "rhein-rheinfelden", "ticino-bellinzona").forEach { id ->

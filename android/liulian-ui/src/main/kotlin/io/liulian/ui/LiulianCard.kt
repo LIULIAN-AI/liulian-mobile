@@ -51,43 +51,48 @@ fun LiulianCard(
 
     val lift by animateDpAsState(
         targetValue = if (interactive && !pressed && !disabled) 0.dp else 0.dp,
-        animationSpec = tween(
-            durationMillis = LiulianTokens.Duration.medium,
-            easing = LiulianTokens.Easing.easeOutQuart
-        ),
-        label = "cardLift"
+        animationSpec =
+            tween(
+                durationMillis = LiulianTokens.Duration.medium,
+                easing = LiulianTokens.Easing.easeOutQuart,
+            ),
+        label = "cardLift",
     )
 
-    val padding = when (size) {
-        CardSize.Compact -> LiulianTokens.Spacing.s4
-        CardSize.Default -> LiulianTokens.Spacing.s6
-        CardSize.Spacious -> LiulianTokens.Spacing.s7
-    }
-    val gap = when (size) {
-        CardSize.Compact -> LiulianTokens.Spacing.s3
-        CardSize.Default -> LiulianTokens.Spacing.s4
-        CardSize.Spacious -> LiulianTokens.Spacing.s5
-    }
+    val padding =
+        when (size) {
+            CardSize.Compact -> LiulianTokens.Spacing.s4
+            CardSize.Default -> LiulianTokens.Spacing.s6
+            CardSize.Spacious -> LiulianTokens.Spacing.s7
+        }
+    val gap =
+        when (size) {
+            CardSize.Compact -> LiulianTokens.Spacing.s3
+            CardSize.Default -> LiulianTokens.Spacing.s4
+            CardSize.Spacious -> LiulianTokens.Spacing.s5
+        }
 
     val borderColor: Color = if (selected) LiulianTokens.Colors.unibeRed else LiulianTokens.Colors.hairline
     val borderWidth = if (selected) 2.dp else 1.dp
 
-    var rootModifier = modifier
-        .fillMaxWidth()
-        .alpha(if (disabled) LiulianTokens.Opacity.disabled else 1f)
-        .offset(y = lift)
-        .shadow(elevation = if (pressed) 0.dp else 0.dp, shape = RoundedCornerShape(LiulianTokens.Radius.md))
-        .clip(RoundedCornerShape(LiulianTokens.Radius.md))
-        .background(LiulianTokens.Colors.surfacePure)
-        .border(borderWidth, borderColor, RoundedCornerShape(LiulianTokens.Radius.md))
+    var rootModifier =
+        modifier
+            .fillMaxWidth()
+            .alpha(if (disabled) LiulianTokens.Opacity.disabled else 1f)
+            .offset(y = lift)
+            .shadow(elevation = if (pressed) 0.dp else 0.dp, shape = RoundedCornerShape(LiulianTokens.Radius.md))
+            .clip(RoundedCornerShape(LiulianTokens.Radius.md))
+            .background(LiulianTokens.Colors.surfacePure)
+            .border(borderWidth, borderColor, RoundedCornerShape(LiulianTokens.Radius.md))
 
     if (interactive && onPress != null) {
-        rootModifier = rootModifier.clickable(
-            interactionSource = interactionSource,
-            indication = null,
-            enabled = !disabled,
-            onClick = onPress,
-        )
+        rootModifier =
+            rootModifier.clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                enabled = !disabled,
+                onClick = onPress,
+            )
     }
     rootModifier = rootModifier.padding(padding)
 
@@ -98,19 +103,21 @@ fun LiulianCard(
         if (header != null) {
             header()
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .background(LiulianTokens.Colors.hairline)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(1.dp)
+                        .background(LiulianTokens.Colors.hairline),
             )
         }
         content()
         if (footer != null) {
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .background(LiulianTokens.Colors.hairline)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(1.dp)
+                        .background(LiulianTokens.Colors.hairline),
             )
             footer()
         }
@@ -121,9 +128,10 @@ fun LiulianCard(
 @Composable
 private fun LiulianCardPreview() {
     Column(
-        modifier = Modifier
-            .padding(LiulianTokens.Spacing.s6)
-            .background(LiulianTokens.Colors.canvasWarm),
+        modifier =
+            Modifier
+                .padding(LiulianTokens.Spacing.s6)
+                .background(LiulianTokens.Colors.canvasWarm),
         verticalArrangement = Arrangement.spacedBy(LiulianTokens.Spacing.s4),
     ) {
         LiulianCard(size = CardSize.Compact) {

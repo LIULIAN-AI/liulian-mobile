@@ -24,15 +24,14 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.liulian.tokens.LiulianTokens
 
 enum class ButtonVariant { Primary, Secondary, Ghost, Danger }
+
 enum class ButtonSize { Sm, Md, Lg }
 
 /**
@@ -56,66 +55,75 @@ fun LiulianButton(
 
     val scale by animateFloatAsState(
         targetValue = if (pressed) LiulianTokens.Control.ScaleActive.value else 1f,
-        animationSpec = tween(
-            durationMillis = LiulianTokens.Duration.instant,
-            easing = LiulianTokens.Easing.easeOut
-        ),
-        label = "buttonPressScale"
+        animationSpec =
+            tween(
+                durationMillis = LiulianTokens.Duration.instant,
+                easing = LiulianTokens.Easing.easeOut,
+            ),
+        label = "buttonPressScale",
     )
 
-    val height = when (size) {
-        ButtonSize.Sm -> LiulianTokens.Control.Height.sm
-        ButtonSize.Md -> LiulianTokens.Control.Height.md
-        ButtonSize.Lg -> LiulianTokens.Control.Height.lg
-    }
-    val paddingX = when (size) {
-        ButtonSize.Sm -> LiulianTokens.Control.PaddingX.sm
-        ButtonSize.Md -> LiulianTokens.Control.PaddingX.md
-        ButtonSize.Lg -> LiulianTokens.Control.PaddingX.lg
-    }
-    val textVariant = when (size) {
-        ButtonSize.Sm -> LiulianTextVariant.Caption
-        ButtonSize.Md -> LiulianTextVariant.Body
-        ButtonSize.Lg -> LiulianTextVariant.Subtitle
-    }
+    val height =
+        when (size) {
+            ButtonSize.Sm -> LiulianTokens.Control.Height.sm
+            ButtonSize.Md -> LiulianTokens.Control.Height.md
+            ButtonSize.Lg -> LiulianTokens.Control.Height.lg
+        }
+    val paddingX =
+        when (size) {
+            ButtonSize.Sm -> LiulianTokens.Control.PaddingX.sm
+            ButtonSize.Md -> LiulianTokens.Control.PaddingX.md
+            ButtonSize.Lg -> LiulianTokens.Control.PaddingX.lg
+        }
+    val textVariant =
+        when (size) {
+            ButtonSize.Sm -> LiulianTextVariant.Caption
+            ButtonSize.Md -> LiulianTextVariant.Body
+            ButtonSize.Lg -> LiulianTextVariant.Subtitle
+        }
 
-    val bg: Color = when (variant) {
-        ButtonVariant.Primary -> LiulianTokens.Colors.unibeRed
-        ButtonVariant.Secondary -> LiulianTokens.Colors.surfacePure
-        ButtonVariant.Ghost -> Color.Transparent
-        ButtonVariant.Danger -> LiulianTokens.Colors.unibeRedDeep
-    }
-    val fg: Color = when (variant) {
-        ButtonVariant.Primary, ButtonVariant.Danger -> LiulianTokens.Colors.surfacePure
-        ButtonVariant.Secondary -> LiulianTokens.Colors.inkCharcoal
-        ButtonVariant.Ghost -> LiulianTokens.Colors.inkMuted
-    }
+    val bg: Color =
+        when (variant) {
+            ButtonVariant.Primary -> LiulianTokens.Colors.unibeRed
+            ButtonVariant.Secondary -> LiulianTokens.Colors.surfacePure
+            ButtonVariant.Ghost -> Color.Transparent
+            ButtonVariant.Danger -> LiulianTokens.Colors.unibeRedDeep
+        }
+    val fg: Color =
+        when (variant) {
+            ButtonVariant.Primary, ButtonVariant.Danger -> LiulianTokens.Colors.surfacePure
+            ButtonVariant.Secondary -> LiulianTokens.Colors.inkCharcoal
+            ButtonVariant.Ghost -> LiulianTokens.Colors.inkMuted
+        }
 
     Box(
-        modifier = modifier
-            .defaultMinSize(minHeight = LiulianTokens.Touch.minTargetAndroid)
-            .graphicsLayer { scaleX = scale; scaleY = scale }
-            .alpha(if (disabled) LiulianTokens.Opacity.disabled else 1f)
-            .clip(RoundedCornerShape(LiulianTokens.Radius.md))
-            .background(bg)
-            .let {
-                if (variant == ButtonVariant.Secondary) {
-                    it.border(
-                        width = 1.dp,
-                        color = LiulianTokens.Colors.hairline,
-                        shape = RoundedCornerShape(LiulianTokens.Radius.md)
-                    )
-                } else it
-            }
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null,
-                enabled = !disabled && !loading,
-                role = Role.Button,
-                onClick = onPress,
-            )
-            .height(height)
-            .padding(horizontal = paddingX),
+        modifier =
+            modifier
+                .defaultMinSize(minHeight = LiulianTokens.Touch.minTargetAndroid)
+                .graphicsLayer {
+                    scaleX = scale
+                    scaleY = scale
+                }.alpha(if (disabled) LiulianTokens.Opacity.disabled else 1f)
+                .clip(RoundedCornerShape(LiulianTokens.Radius.md))
+                .background(bg)
+                .let {
+                    if (variant == ButtonVariant.Secondary) {
+                        it.border(
+                            width = 1.dp,
+                            color = LiulianTokens.Colors.hairline,
+                            shape = RoundedCornerShape(LiulianTokens.Radius.md),
+                        )
+                    } else {
+                        it
+                    }
+                }.clickable(
+                    interactionSource = interactionSource,
+                    indication = null,
+                    enabled = !disabled && !loading,
+                    role = Role.Button,
+                    onClick = onPress,
+                ).height(height)
+                .padding(horizontal = paddingX),
         contentAlignment = Alignment.Center,
     ) {
         Row(
@@ -125,9 +133,10 @@ fun LiulianButton(
             if (loading) {
                 // Minimal spinner placeholder; replace with brand spinner when delivered.
                 Box(
-                    modifier = Modifier
-                        .height(LiulianTokens.Control.IconSize.md)
-                        .background(fg.copy(alpha = 0.6f), shape = RoundedCornerShape(50))
+                    modifier =
+                        Modifier
+                            .height(LiulianTokens.Control.IconSize.md)
+                            .background(fg.copy(alpha = 0.6f), shape = RoundedCornerShape(50)),
                 )
             } else {
                 LiulianText(label, variant = textVariant, color = fg)
@@ -140,9 +149,10 @@ fun LiulianButton(
 @Composable
 private fun LiulianButtonPreview() {
     Column(
-        modifier = Modifier
-            .background(LiulianTokens.Colors.canvasWarm)
-            .padding(LiulianTokens.Spacing.s7),
+        modifier =
+            Modifier
+                .background(LiulianTokens.Colors.canvasWarm)
+                .padding(LiulianTokens.Spacing.s7),
         verticalArrangement = Arrangement.spacedBy(LiulianTokens.Spacing.s4),
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(LiulianTokens.Spacing.s3)) {

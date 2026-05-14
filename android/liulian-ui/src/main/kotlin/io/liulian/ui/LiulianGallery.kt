@@ -18,11 +18,12 @@ import io.liulian.tokens.LiulianTokens
 @Composable
 fun LiulianGallery(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(LiulianTokens.Colors.canvasWarm)
-            .verticalScroll(rememberScrollState())
-            .padding(LiulianTokens.Spacing.s6),
+        modifier =
+            modifier
+                .fillMaxSize()
+                .background(LiulianTokens.Colors.canvasWarm)
+                .verticalScroll(rememberScrollState())
+                .padding(LiulianTokens.Spacing.s6),
         verticalArrangement = Arrangement.spacedBy(LiulianTokens.Spacing.s8),
     ) {
         Header()

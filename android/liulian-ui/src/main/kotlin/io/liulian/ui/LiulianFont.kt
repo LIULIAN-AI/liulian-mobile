@@ -22,23 +22,26 @@ import androidx.compose.ui.text.font.FontWeight
  */
 object LiulianFont {
     @Composable
-    fun display(): FontFamily = remember {
-        FontFamily(Font(R.font.fraunces, FontWeight.Medium))
-    }
+    fun display(): FontFamily =
+        remember {
+            FontFamily(Font(R.font.fraunces, FontWeight.Medium))
+        }
 
     @Composable
-    fun body(): FontFamily = remember {
-        FontFamily(
-            Font(R.font.switzer_regular, FontWeight.Normal),
-            Font(R.font.switzer_medium, FontWeight.Medium),
-        )
-    }
+    fun body(): FontFamily =
+        remember {
+            FontFamily(
+                Font(R.font.switzer_regular, FontWeight.Normal),
+                Font(R.font.switzer_medium, FontWeight.Medium),
+            )
+        }
 
     @Composable
-    fun mono(): FontFamily = remember {
-        FontFamily(
-            Font(R.font.jetbrains_mono_regular, FontWeight.Normal),
-            Font(R.font.jetbrains_mono_medium, FontWeight.Medium),
-        )
-    }
+    fun mono(): FontFamily =
+        remember {
+            FontFamily(
+                Font(R.font.jetbrains_mono_regular, FontWeight.Normal),
+                Font(R.font.jetbrains_mono_medium, FontWeight.Medium),
+            )
+        }
 }

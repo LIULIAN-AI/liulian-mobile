@@ -23,8 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.liulian.tokens.LiulianTokens
-import io.liulian.ui.ButtonVariant
 import io.liulian.ui.ButtonSize
+import io.liulian.ui.ButtonVariant
 import io.liulian.ui.LiulianButton
 
 class MainActivity : ComponentActivity() {
@@ -40,10 +40,11 @@ private fun App() {
     var tab by remember { mutableStateOf(Tab.Home) }
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(LiulianTokens.Colors.canvasWarm)
-            .statusBarsPadding(),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(LiulianTokens.Colors.canvasWarm)
+                .statusBarsPadding(),
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             Box(modifier = Modifier.fillMaxWidth().weight(1f)) {
@@ -60,13 +61,17 @@ private fun App() {
 private enum class Tab { Home, Gallery }
 
 @Composable
-private fun BottomTabBar(active: Tab, onSelect: (Tab) -> Unit) {
+private fun BottomTabBar(
+    active: Tab,
+    onSelect: (Tab) -> Unit,
+) {
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(64.dp)
-            .background(LiulianTokens.Colors.surfacePure)
-            .border(width = 1.dp, color = LiulianTokens.Colors.hairline),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(64.dp)
+                .background(LiulianTokens.Colors.surfacePure)
+                .border(width = 1.dp, color = LiulianTokens.Colors.hairline),
         contentAlignment = Alignment.Center,
     ) {
         Row(

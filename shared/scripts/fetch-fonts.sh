@@ -10,12 +10,13 @@ trap 'rm -rf "$TMP"' EXIT
 
 echo "→ download fonts to ${TMP}"
 
-# 1. Fraunces — Google Fonts variable-axis font with stylistic alternates (incl. WONK axis for italic alt-U)
-# License: SIL OFL — embedding allowed
-curl -sSL -o "${TMP}/fraunces.zip" \
-  "https://fonts.google.com/download?family=Fraunces"
-unzip -q "${TMP}/fraunces.zip" -d "${TMP}/fraunces"
-FRAUNCES_TTF=$(find "${TMP}/fraunces" -name "Fraunces*.ttf" | head -1)
+# 1. Fraunces — variable-axis font with stylistic alternates (incl. WONK for italic alt-U).
+# Source: google/fonts repo (SIL OFL — embedding allowed).
+# The fonts.google.com/download endpoint returns HTML, so we hit the raw .ttf via GitHub.
+mkdir -p "${TMP}/fraunces"
+curl -sSL -o "${TMP}/fraunces/Fraunces.ttf" \
+  "https://github.com/google/fonts/raw/main/ofl/fraunces/Fraunces%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf"
+FRAUNCES_TTF="${TMP}/fraunces/Fraunces.ttf"
 
 # 2. Switzer — Fontshare (Indian Type Foundry)
 # License: SIL OFL via Fontshare

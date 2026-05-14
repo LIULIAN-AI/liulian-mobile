@@ -14,9 +14,11 @@ object LiulianTokens {
         val canvasWarm = Color(0xFFFBFBFA.toInt())
         val canvasSoft = Color(0xFFF7F6F3.toInt())
         val canvasWarmer = Color(0xFFF2F0EA.toInt())
+
         /** Card surface; functional only. */
         val surfacePure = Color(0xFFFFFFFF.toInt())
         val surfaceShade = Color(0xFFFAFAF9.toInt())
+
         /** Body text. Never use #000. */
         val inkCharcoal = Color(0xFF131313.toInt())
         val inkStrong = Color(0xFF1F1F1F.toInt())
@@ -24,10 +26,13 @@ object LiulianTokens {
         val inkMuted = Color(0xFF666A70.toInt())
         val inkFaint = Color(0xFF94989D.toInt())
         val inkQuiet = Color(0xFFC0C2C5.toInt())
+
         /** Brand anchor. Spot color only. Max 2 visible per viewport on most pages. */
         val unibeRed = Color(0xFFE20613.toInt())
+
         /** Hover/focus/destructive-confirm. */
         val unibeRedDeep = Color(0xFFB00010.toInt())
+
         /** Pill backgrounds, CI band fills. */
         val unibeRedTint = Color(0xFFFDEBEC.toInt())
         val unibeRedTint2 = Color(0xFFFAD9DC.toInt())
@@ -94,19 +99,23 @@ object LiulianTokens {
             val md = 40.dp
             val lg = 48.dp
         }
+
         object PaddingX {
             val sm = 16.dp
             val md = 24.dp
             val lg = 28.dp
         }
+
         object IconSize {
             val sm = 14.dp
             val md = 16.dp
             val lg = 18.dp
         }
+
         object IconGap {
             val value = 8.dp
         }
+
         object ScaleActive {
             const val value = 0.98f
         }
@@ -140,5 +149,4 @@ object LiulianTokens {
         val easeOutQuart = CubicBezierEasing(0.16f, 1f, 0.3f, 1f)
         val easeInOut = CubicBezierEasing(0.65f, 0f, 0.35f, 1f)
     }
-
 }

@@ -11,7 +11,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import io.liulian.tokens.LiulianTokens
@@ -23,10 +22,15 @@ import io.liulian.tokens.LiulianTokens
  * (font, size, weight, lineHeight, letterSpacing, color).
  */
 enum class LiulianTextVariant {
-    Display, DisplayShort,
-    Heading, Title, Subtitle,
-    Body, BodyStrong,
-    Caption, MonoLabel,
+    Display,
+    DisplayShort,
+    Heading,
+    Title,
+    Subtitle,
+    Body,
+    BodyStrong,
+    Caption,
+    MonoLabel,
 }
 
 @Composable
@@ -42,86 +46,96 @@ fun LiulianText(
     val bodyFamily = LiulianFont.body()
     val monoFamily = LiulianFont.mono()
 
-    val style: TextStyle = when (variant) {
-        LiulianTextVariant.Display -> TextStyle(
-            fontFamily = displayFamily,
-            fontSize = LiulianTokens.FontSize.xl6,
-            fontWeight = FontWeight.Medium,
-            lineHeight = (LiulianTokens.FontSize.xl6.value * 0.95f).sp,
-            letterSpacing = (-0.04).em,
-            color = color,
-            textAlign = align,
-        )
-        LiulianTextVariant.DisplayShort -> TextStyle(
-            fontFamily = displayFamily,
-            fontSize = LiulianTokens.FontSize.xl5,
-            fontWeight = FontWeight.Medium,
-            lineHeight = (LiulianTokens.FontSize.xl5.value * 0.98f).sp,
-            letterSpacing = (-0.035).em,
-            color = color,
-            textAlign = align,
-        )
-        LiulianTextVariant.Heading -> TextStyle(
-            fontFamily = displayFamily,
-            fontSize = LiulianTokens.FontSize.xl4,
-            fontWeight = FontWeight.Medium,
-            lineHeight = (LiulianTokens.FontSize.xl4.value * 1.05f).sp,
-            letterSpacing = (-0.025).em,
-            color = color,
-            textAlign = align,
-        )
-        LiulianTextVariant.Title -> TextStyle(
-            fontFamily = displayFamily,
-            fontSize = LiulianTokens.FontSize.xl3,
-            fontWeight = FontWeight.Medium,
-            lineHeight = (LiulianTokens.FontSize.xl3.value * 1.12f).sp,
-            letterSpacing = (-0.02).em,
-            color = color,
-            textAlign = align,
-        )
-        LiulianTextVariant.Subtitle -> TextStyle(
-            fontFamily = bodyFamily,
-            fontSize = LiulianTokens.FontSize.xl,
-            fontWeight = FontWeight.Medium,
-            lineHeight = (LiulianTokens.FontSize.xl.value * 1.35f).sp,
-            letterSpacing = (-0.01).em,
-            color = color,
-            textAlign = align,
-        )
-        LiulianTextVariant.Body -> TextStyle(
-            fontFamily = bodyFamily,
-            fontSize = LiulianTokens.FontSize.md,
-            fontWeight = FontWeight.Normal,
-            lineHeight = (LiulianTokens.FontSize.md.value * 1.55f).sp,
-            color = color,
-            textAlign = align,
-        )
-        LiulianTextVariant.BodyStrong -> TextStyle(
-            fontFamily = bodyFamily,
-            fontSize = LiulianTokens.FontSize.md,
-            fontWeight = FontWeight.Medium,
-            lineHeight = (LiulianTokens.FontSize.md.value * 1.55f).sp,
-            color = color,
-            textAlign = align,
-        )
-        LiulianTextVariant.Caption -> TextStyle(
-            fontFamily = bodyFamily,
-            fontSize = LiulianTokens.FontSize.xs,
-            fontWeight = FontWeight.Normal,
-            lineHeight = (LiulianTokens.FontSize.xs.value * 1.45f).sp,
-            color = color,
-            textAlign = align,
-        )
-        LiulianTextVariant.MonoLabel -> TextStyle(
-            fontFamily = monoFamily,
-            fontSize = LiulianTokens.FontSize.xs,
-            fontWeight = FontWeight.Medium,
-            lineHeight = (LiulianTokens.FontSize.xs.value * 1.4f).sp,
-            letterSpacing = 0.10.em,
-            color = color,
-            textAlign = align,
-        )
-    }
+    val style: TextStyle =
+        when (variant) {
+            LiulianTextVariant.Display ->
+                TextStyle(
+                    fontFamily = displayFamily,
+                    fontSize = LiulianTokens.FontSize.xl6,
+                    fontWeight = FontWeight.Medium,
+                    lineHeight = (LiulianTokens.FontSize.xl6.value * 0.95f).sp,
+                    letterSpacing = (-0.04).em,
+                    color = color,
+                    textAlign = align,
+                )
+            LiulianTextVariant.DisplayShort ->
+                TextStyle(
+                    fontFamily = displayFamily,
+                    fontSize = LiulianTokens.FontSize.xl5,
+                    fontWeight = FontWeight.Medium,
+                    lineHeight = (LiulianTokens.FontSize.xl5.value * 0.98f).sp,
+                    letterSpacing = (-0.035).em,
+                    color = color,
+                    textAlign = align,
+                )
+            LiulianTextVariant.Heading ->
+                TextStyle(
+                    fontFamily = displayFamily,
+                    fontSize = LiulianTokens.FontSize.xl4,
+                    fontWeight = FontWeight.Medium,
+                    lineHeight = (LiulianTokens.FontSize.xl4.value * 1.05f).sp,
+                    letterSpacing = (-0.025).em,
+                    color = color,
+                    textAlign = align,
+                )
+            LiulianTextVariant.Title ->
+                TextStyle(
+                    fontFamily = displayFamily,
+                    fontSize = LiulianTokens.FontSize.xl3,
+                    fontWeight = FontWeight.Medium,
+                    lineHeight = (LiulianTokens.FontSize.xl3.value * 1.12f).sp,
+                    letterSpacing = (-0.02).em,
+                    color = color,
+                    textAlign = align,
+                )
+            LiulianTextVariant.Subtitle ->
+                TextStyle(
+                    fontFamily = bodyFamily,
+                    fontSize = LiulianTokens.FontSize.xl,
+                    fontWeight = FontWeight.Medium,
+                    lineHeight = (LiulianTokens.FontSize.xl.value * 1.35f).sp,
+                    letterSpacing = (-0.01).em,
+                    color = color,
+                    textAlign = align,
+                )
+            LiulianTextVariant.Body ->
+                TextStyle(
+                    fontFamily = bodyFamily,
+                    fontSize = LiulianTokens.FontSize.md,
+                    fontWeight = FontWeight.Normal,
+                    lineHeight = (LiulianTokens.FontSize.md.value * 1.55f).sp,
+                    color = color,
+                    textAlign = align,
+                )
+            LiulianTextVariant.BodyStrong ->
+                TextStyle(
+                    fontFamily = bodyFamily,
+                    fontSize = LiulianTokens.FontSize.md,
+                    fontWeight = FontWeight.Medium,
+                    lineHeight = (LiulianTokens.FontSize.md.value * 1.55f).sp,
+                    color = color,
+                    textAlign = align,
+                )
+            LiulianTextVariant.Caption ->
+                TextStyle(
+                    fontFamily = bodyFamily,
+                    fontSize = LiulianTokens.FontSize.xs,
+                    fontWeight = FontWeight.Normal,
+                    lineHeight = (LiulianTokens.FontSize.xs.value * 1.45f).sp,
+                    color = color,
+                    textAlign = align,
+                )
+            LiulianTextVariant.MonoLabel ->
+                TextStyle(
+                    fontFamily = monoFamily,
+                    fontSize = LiulianTokens.FontSize.xs,
+                    fontWeight = FontWeight.Medium,
+                    lineHeight = (LiulianTokens.FontSize.xs.value * 1.4f).sp,
+                    letterSpacing = 0.10.em,
+                    color = color,
+                    textAlign = align,
+                )
+        }
 
     val rendered: String =
         if (variant == LiulianTextVariant.MonoLabel) text.uppercase() else text

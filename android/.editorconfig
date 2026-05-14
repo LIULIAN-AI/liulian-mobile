@@ -1,0 +1,12 @@
+root = true
+
+[*.{kt,kts}]
+indent_style = space
+indent_size = 4
+max_line_length = 120
+
+# Compose conventions — disable rules that conflict with Compose API guidelines
+# Composable functions use PascalCase (per https://github.com/androidx/androidx/blob/androidx-main/compose/docs/compose-api-guidelines.md)
+ktlint_standard_function-naming = disabled
+ktlint_standard_property-naming = disabled
+ktlint_standard_filename = disabled
