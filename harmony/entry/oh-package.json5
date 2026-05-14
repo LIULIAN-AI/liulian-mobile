@@ -1,0 +1,11 @@
+{
+  "name": "entry",
+  "version": "0.1.0",
+  "description": "LIULIAN app entry module",
+  "main": "",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "liulian_ui": "file:../liulian_ui",
+  },
+}

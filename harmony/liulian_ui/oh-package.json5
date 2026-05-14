@@ -1,0 +1,9 @@
+{
+  "name": "liulian_ui",
+  "version": "0.1.0",
+  "description": "LIULIAN UI component library for HarmonyOS NEXT (ArkTS / ArkUI)",
+  "main": "Index.ets",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+}

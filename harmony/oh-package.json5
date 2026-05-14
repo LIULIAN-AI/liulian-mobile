@@ -1,0 +1,10 @@
+{
+  "name": "liulian",
+  "version": "0.1.0",
+  "description": "LIULIAN HarmonyOS app workspace",
+  "modelVersion": "5.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.19"
+  }
+}

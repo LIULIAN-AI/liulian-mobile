@@ -1,0 +1,7 @@
+{
+  "string": [
+    { "name": "module_desc", "value": "LIULIAN spatio-temporal AI" },
+    { "name": "EntryAbility_desc", "value": "LIULIAN main app" },
+    { "name": "EntryAbility_label", "value": "LIULIAN" }
+  ]
+}
