@@ -98,4 +98,57 @@ final class LiulianSnapshotTests: XCTestCase {
 
         assertSnapshot(of: view, as: .image, named: "gallery")
     }
+
+    func testInputVariants() {
+        struct Container: View {
+            @State var v1 = ""
+            @State var v2 = "abc"
+            @State var v3 = "read-only"
+            @State var v4 = "disabled"
+            var body: some View {
+                VStack(alignment: .leading, spacing: LiulianTokens.Spacing.s4) {
+                    LiulianInput(value: $v1, label: "Station", placeholder: "e.g. aare-bern")
+                    LiulianInput(value: $v2, label: "Validated", errorText: "Must start with a letter")
+                    LiulianInput(value: $v3, label: "Readonly", readonly: true)
+                    LiulianInput(value: $v4, label: "Disabled", disabled: true)
+                }
+                .padding(LiulianTokens.Spacing.s6)
+                .frame(width: 411, height: 600, alignment: .topLeading)
+                .background(LiulianTokens.Colors.canvasWarm)
+            }
+        }
+        assertSnapshot(of: Container(), as: .image, named: "input_variants")
+    }
+
+    func testTabDefault() {
+        struct Container: View {
+            @State var active = "forecast"
+            var body: some View {
+                LiulianTab(
+                    items: [
+                        .init(id: "landing", label: "LANDING"),
+                        .init(id: "forecast", label: "FORECAST"),
+                        .init(id: "studio", label: "STUDIO"),
+                    ],
+                    activeId: active,
+                    onChange: { active = $0 }
+                )
+                .frame(width: 411, height: 60, alignment: .topLeading)
+            }
+        }
+        assertSnapshot(of: Container(), as: .image, named: "tab_default")
+    }
+
+    func testListItemVariants() {
+        let view = VStack(spacing: 0) {
+            LiulianListItem(primary: "aare-bern", secondary: "142 cm · forecast +6", variant: .navigation, onPress: {})
+            LiulianListItem(primary: "rhein-rheinfelden", secondary: "78 cm · stable", variant: .selectable, selected: true, onPress: {})
+            LiulianListItem(primary: "ticino-bellinzona", secondary: "210 cm · -3 / 24h", variant: .multiSelectable, selected: false, onPress: {})
+            LiulianListItem(primary: "limmat-baden", secondary: "static, no chevron", variant: .content, onPress: {})
+        }
+        .frame(width: 411, height: 400, alignment: .topLeading)
+        .background(LiulianTokens.Colors.canvasWarm)
+
+        assertSnapshot(of: view, as: .image, named: "listitem_variants")
+    }
 }
