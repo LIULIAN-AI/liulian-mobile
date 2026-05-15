@@ -11,6 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import io.liulian.tokens.LiulianTokens
@@ -30,7 +34,46 @@ fun LiulianGallery(modifier: Modifier = Modifier) {
         SectionText()
         SectionButton()
         SectionCard()
+        SectionInput()
+        SectionTab()
+        SectionListItem()
         Spacer(modifier = Modifier.height(LiulianTokens.Spacing.s10))
+    }
+}
+
+@Composable
+private fun SectionInput() {
+    SectionTitle("LiulianInput")
+    Column(verticalArrangement = Arrangement.spacedBy(LiulianTokens.Spacing.s4)) {
+        LiulianInput(value = "", onChange = {}, label = "Station", placeholder = "e.g. aare-bern")
+        LiulianInput(value = "abc", onChange = {}, label = "Validated", errorText = "Must start with a letter")
+        LiulianInput(value = "read-only", onChange = {}, label = "Readonly", readonly = true)
+    }
+}
+
+@Composable
+private fun SectionTab() {
+    SectionTitle("LiulianTab")
+    var activeTab by remember { mutableStateOf("forecast") }
+    LiulianTab(
+        items = listOf(
+            LiulianTabItem("landing", "LANDING"),
+            LiulianTabItem("forecast", "FORECAST"),
+            LiulianTabItem("studio", "STUDIO"),
+        ),
+        activeId = activeTab,
+        onChange = { activeTab = it },
+    )
+}
+
+@Composable
+private fun SectionListItem() {
+    SectionTitle("LiulianListItem")
+    Column {
+        LiulianListItem(primary = "aare-bern", secondary = "142 cm · forecast +6", onPress = {}, variant = ListItemVariant.Navigation)
+        LiulianListItem(primary = "rhein-rheinfelden", secondary = "78 cm · stable", onPress = {}, variant = ListItemVariant.Selectable, selected = true)
+        LiulianListItem(primary = "ticino-bellinzona", secondary = "210 cm · -3 / 24h", onPress = {}, variant = ListItemVariant.MultiSelectable, selected = false)
+        LiulianListItem(primary = "limmat-baden", secondary = "static, no chevron", onPress = {}, variant = ListItemVariant.Content)
     }
 }
 

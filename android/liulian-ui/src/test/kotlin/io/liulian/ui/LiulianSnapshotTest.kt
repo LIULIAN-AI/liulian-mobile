@@ -122,4 +122,59 @@ class LiulianSnapshotTest {
             LiulianGallery()
         }
     }
+
+    @Test
+    fun input_variants() {
+        paparazzi.snapshot {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(LiulianTokens.Colors.canvasWarm)
+                    .padding(LiulianTokens.Spacing.s6),
+                verticalArrangement = Arrangement.spacedBy(LiulianTokens.Spacing.s4),
+            ) {
+                LiulianInput(value = "", onChange = {}, label = "Station", placeholder = "e.g. aare-bern")
+                LiulianInput(value = "abc", onChange = {}, label = "Validated", errorText = "Must start with a letter")
+                LiulianInput(value = "read-only", onChange = {}, label = "Readonly", readonly = true)
+                LiulianInput(value = "disabled", onChange = {}, label = "Disabled", disabled = true)
+            }
+        }
+    }
+
+    @Test
+    fun tab_default() {
+        paparazzi.snapshot {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(LiulianTokens.Colors.canvasWarm),
+            ) {
+                LiulianTab(
+                    items = listOf(
+                        LiulianTabItem("landing", "LANDING"),
+                        LiulianTabItem("forecast", "FORECAST"),
+                        LiulianTabItem("studio", "STUDIO"),
+                    ),
+                    activeId = "forecast",
+                    onChange = {},
+                )
+            }
+        }
+    }
+
+    @Test
+    fun listitem_variants() {
+        paparazzi.snapshot {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(LiulianTokens.Colors.canvasWarm),
+            ) {
+                LiulianListItem(primary = "aare-bern", secondary = "142 cm · forecast +6", onPress = {}, variant = ListItemVariant.Navigation)
+                LiulianListItem(primary = "rhein-rheinfelden", secondary = "78 cm · stable", onPress = {}, variant = ListItemVariant.Selectable, selected = true)
+                LiulianListItem(primary = "ticino-bellinzona", secondary = "210 cm · -3 / 24h", onPress = {}, variant = ListItemVariant.MultiSelectable, selected = false)
+                LiulianListItem(primary = "limmat-baden", secondary = "static, no chevron", onPress = {}, variant = ListItemVariant.Content)
+            }
+        }
+    }
 }
