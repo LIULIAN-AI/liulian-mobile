@@ -11,10 +11,12 @@
 | 字体下载 | ✅ verified | Fraunces (360KB) + Switzer + JetBrains Mono 已分发到三端 |
 | Android liulian-ui Kotlin compile | ✅ **PASS** | `liulian-ui-debug.aar` |
 | Android app 全量编译 | ✅ **PASS** | `app-debug.apk` (7.4 MB) |
-| **Android Paparazzi VR baseline** | ✅ **PASS** | 4 张 PNG (text / button / card / gallery) 入仓 |
+| **Android Paparazzi VR baseline** | ✅ **PASS** | 4 张 PNG 入仓 `android/liulian-ui/src/test/snapshots/images/` |
 | Android emulator 启动 | ❌ 未跑 | 需 GUI 环境运行 emulator |
-| iOS 编译 / snapshot tests | ⚙️ **CI 配好** | `.github/workflows/ios-snapshots.yml` 用 `macos-26` runner，public repo free |
-| HarmonyOS 编译 | ⚙️ **CI stub** | `.github/workflows/harmony-build.yml`（需自托管 Linux runner，参 HARMONY_TESTING.md） |
+| **iOS SwiftUI snapshot baseline** | ✅ **GitHub Actions PASS** | 4 张 PNG 入仓 `ios/LiulianUI/Tests/.../`，macos-26 + iPhone 17 sim |
+| **Web React ui-react** | ✅ **build + 浏览器渲染 verified** | `@liulian/ui-react` ESM/CJS/DTS bundle + Playwright Chrome 截图入仓 |
+| **3-grid VR 对比** | ✅ 已生成 | `shared/refs/3grid-web-ios-android.png` |
+| HarmonyOS 编译 | ⚙️ CI stub | `.github/workflows/harmony-build.yml`（需自托管 Linux runner + Huawei dev account，参 HARMONY_TESTING.md） |
 
 ## 一次性准备（任何平台之前先做）
 
