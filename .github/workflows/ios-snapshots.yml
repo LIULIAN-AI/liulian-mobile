@@ -25,11 +25,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Select Xcode 26
+      - name: Verify Xcode + Swift
         run: |
-          sudo xcode-select -switch /Applications/Xcode_26.app/Contents/Developer || true
           xcodebuild -version
           swift --version
+          xcrun simctl list devices iOS available | head -20
 
       - name: Cache Swift packages
         uses: actions/cache@v4
@@ -46,15 +46,23 @@ jobs:
         working-directory: ios/LiulianUI
         run: |
           set -o pipefail
+          # macos-26 runner ships iPhone 17 + 16e simulators (not iPhone 15).
+          # Pick latest iPhone 17 dynamically so this survives Xcode minor bumps.
+          DEVICE_ID=$(xcrun simctl list devices iOS available -j | \
+            python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          for runtime, devices in data['devices'].items():
+              if 'iOS' not in runtime: continue
+              for d in devices:
+                  if d.get('isAvailable') and 'iPhone 17' in d.get('name',''):
+                      print(d['udid']); break
+              else: continue
+              break")
+          echo "Using simulator: $DEVICE_ID"
           xcodebuild test \
             -scheme LiulianUI \
-            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
-            -enableCodeCoverage NO \
-            -resultBundlePath TestResults.xcresult \
-            | xcbeautify || \
-          xcodebuild test \
-            -scheme LiulianUI \
-            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+            -destination "platform=iOS Simulator,id=${DEVICE_ID}" \
             -enableCodeCoverage NO \
             -resultBundlePath TestResults.xcresult
 
