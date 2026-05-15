@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.paparazzi)
 }
 
 android {
@@ -34,4 +35,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    // Paparazzi snapshot tests (JVM, no emulator needed)
+    testImplementation(libs.junit)
 }
