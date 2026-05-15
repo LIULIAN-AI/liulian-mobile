@@ -11,11 +11,11 @@
 | 字体下载 | ✅ verified | Fraunces (360KB) + Switzer + JetBrains Mono 已分发到三端 |
 | Android liulian-ui Kotlin compile | ✅ **PASS** | `liulian-ui-debug.aar` |
 | Android app 全量编译 | ✅ **PASS** | `app-debug.apk` (7.4 MB) |
-| **Android Paparazzi VR baseline** | ✅ **PASS** | 4 张 PNG 入仓 `android/liulian-ui/src/test/snapshots/images/` |
+| **Android Paparazzi VR baseline** | ✅ **PASS** | **7 张 PNG** 入仓 `android/liulian-ui/src/test/snapshots/images/`（含 Input/Tab/ListItem）|
 | Android emulator 启动 | ❌ 未跑 | 需 GUI 环境运行 emulator |
-| **iOS SwiftUI snapshot baseline** | ✅ **GitHub Actions PASS** | 4 张 PNG 入仓 `ios/LiulianUI/Tests/.../`，macos-26 + iPhone 17 sim |
-| **Web React ui-react** | ✅ **build + 浏览器渲染 verified** | `@liulian/ui-react` ESM/CJS/DTS bundle + Playwright Chrome 截图入仓 |
-| **3-grid VR 对比** | ✅ 已生成 | `shared/refs/3grid-web-ios-android.png` |
+| **iOS SwiftUI snapshot baseline** | ✅ **GitHub Actions PASS** | **7 张 PNG** 入仓 `ios/LiulianUI/Tests/.../`，macos-26 + iPhone 17 sim |
+| **Web React ui-react** | ✅ **build + Chrome 渲染 verified** | `@liulian/ui-react` 6 组件 ESM bundle 18.95 KB + Playwright 截图 |
+| **VR 3-grid + 2-grid 对比** | ✅ 全部新组件已生成 | `shared/refs/3grid-*.png` + `shared/refs/2grid-ios-android-{input,tab,listitem}.png` |
 | HarmonyOS 编译 | ⚙️ CI stub | `.github/workflows/harmony-build.yml`（需自托管 Linux runner + Huawei dev account，参 HARMONY_TESTING.md） |
 
 ## 一次性准备（任何平台之前先做）
