@@ -11,9 +11,10 @@
 | 字体下载 | ✅ verified | Fraunces (360KB) + Switzer + JetBrains Mono 已分发到三端 |
 | Android liulian-ui Kotlin compile | ✅ **PASS** | `liulian-ui-debug.aar` |
 | Android app 全量编译 | ✅ **PASS** | `app-debug.apk` (7.4 MB) |
+| **Android Paparazzi VR baseline** | ✅ **PASS** | 4 张 PNG (text / button / card / gallery) 入仓 |
 | Android emulator 启动 | ❌ 未跑 | 需 GUI 环境运行 emulator |
-| iOS 编译 | ❌ 无 Linux 可能 | 需 Mac + Xcode |
-| HarmonyOS 编译 | ❌ 无 Linux 友好工具 | 需 Windows/macOS + DevEco Studio |
+| iOS 编译 / snapshot tests | ⚙️ **CI 配好** | `.github/workflows/ios-snapshots.yml` 用 `macos-26` runner，public repo free |
+| HarmonyOS 编译 | ⚙️ **CI stub** | `.github/workflows/harmony-build.yml`（需自托管 Linux runner，参 HARMONY_TESTING.md） |
 
 ## 一次性准备（任何平台之前先做）
 

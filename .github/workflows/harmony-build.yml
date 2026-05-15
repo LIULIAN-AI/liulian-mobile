@@ -1,0 +1,53 @@
+name: HarmonyOS build (self-hosted)
+
+# STUB: requires a self-hosted Linux runner with HarmonyOS Command Line Tools installed
+# (DEVECO_SDK_HOME env var set, hvigorw on PATH).
+#
+# To enable:
+#   1. Set up a self-hosted runner — Settings → Actions → Runners → New self-hosted runner
+#   2. On that machine: install HarmonyOS Command Line Tools per HARMONY_TESTING.md §1
+#   3. Label the runner `harmony-cli`
+#   4. Uncomment the `on:` triggers below
+#
+# Until enabled, this workflow is dormant.
+
+on:
+  # push:
+  #   branches: [main, "feat/**"]
+  #   paths:
+  #     - "harmony/**"
+  #     - "shared/scripts/sync-tokens.sh"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: [self-hosted, harmony-cli]
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify HarmonyOS tools
+        run: |
+          echo "DEVECO_SDK_HOME=$DEVECO_SDK_HOME"
+          hvigorw --version || (echo "hvigorw not on PATH" && exit 1)
+
+      - name: Sync tokens
+        run: bash shared/scripts/sync-tokens.sh
+
+      - name: Install fonts (rawfile)
+        run: bash shared/scripts/fetch-fonts.sh
+
+      - name: Build .hap
+        working-directory: harmony
+        run: |
+          ./hvigorw clean
+          ./hvigorw assembleHap
+
+      - name: Upload .hap artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: liulian-harmony-hap
+          path: harmony/entry/build/default/outputs/default/*.hap

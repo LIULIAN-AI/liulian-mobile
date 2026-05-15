@@ -1,0 +1,75 @@
+name: iOS snapshots
+
+on:
+  push:
+    branches: [main, "feat/**"]
+    paths:
+      - "ios/**"
+      - "shared/scripts/fetch-fonts.sh"
+      - ".github/workflows/ios-snapshots.yml"
+  pull_request:
+    paths:
+      - "ios/**"
+      - "shared/scripts/fetch-fonts.sh"
+      - ".github/workflows/ios-snapshots.yml"
+  workflow_dispatch:
+
+jobs:
+  snapshot:
+    name: SwiftUI snapshot tests (macOS runner)
+    # macos-26 = macOS Tahoe + Xcode 26 (released Q1 2026, free for public repos: 2000 min/mo)
+    runs-on: macos-26
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode 26
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_26.app/Contents/Developer || true
+          xcodebuild -version
+          swift --version
+
+      - name: Cache Swift packages
+        uses: actions/cache@v4
+        with:
+          path: ios/LiulianUI/.build
+          key: swift-pkgs-${{ runner.os }}-${{ hashFiles('ios/LiulianUI/Package.resolved') }}
+          restore-keys: |
+            swift-pkgs-${{ runner.os }}-
+
+      - name: Install fonts (required for snapshots — must match design-system contract)
+        run: bash shared/scripts/fetch-fonts.sh
+
+      - name: Build + run snapshot tests
+        working-directory: ios/LiulianUI
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -scheme LiulianUI \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+            -enableCodeCoverage NO \
+            -resultBundlePath TestResults.xcresult \
+            | xcbeautify || \
+          xcodebuild test \
+            -scheme LiulianUI \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+            -enableCodeCoverage NO \
+            -resultBundlePath TestResults.xcresult
+
+      - name: Upload PNG snapshots (success — VR baseline)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-snapshots
+          path: ios/LiulianUI/Tests/LiulianUITests/__Snapshots__/
+
+      - name: Upload failure diffs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-snapshot-failures
+          path: |
+            ios/LiulianUI/Tests/LiulianUITests/__Snapshots__/
+            ios/LiulianUI/TestResults.xcresult
